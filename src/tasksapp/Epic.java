@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 public class Epic extends Task {
 
-    private final ArrayList<Integer> subtaskIds;
+    private final ArrayList<Integer> subtaskIds = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description, TaskStatus.NEW);
-        this.subtaskIds = new ArrayList<>();
         System.out.println("Создан эпик: '" + name + "'");
     }
 
@@ -17,9 +16,10 @@ public class Epic extends Task {
     }
 
     public void addSubtaskId(int subtaskId) {
-        subtaskIds.add(subtaskId);
-        System.out.println("Добавлена подзадача ID=" + subtaskId + " в эпик ID=" + this.getId());
-
+        if (subtaskId != this.getId()) {
+            subtaskIds.add(subtaskId);
+            System.out.println("Добавлена подзадача ID=" + subtaskId + " в эпик ID=" + this.getId());
+        }
     }
 
     public void removeSubtaskId(int subtaskId) {
