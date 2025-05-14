@@ -1,11 +1,10 @@
 package tasksapp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
     // методы для обычных задач (Task)
-    ArrayList<Task> getAllTasks();
+    List<Task> getAllTasks();
 
     void deleteAllTasks();
 
@@ -18,7 +17,7 @@ public interface TaskManager {
     void deleteTask(int id);
 
     // Методы для эпиков (Epic)
-    ArrayList<Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
     void deleteAllEpics();
 
@@ -31,7 +30,7 @@ public interface TaskManager {
     void deleteEpic(int id);
 
     // Методы для подзадачи (Subtask)
-    ArrayList<Subtask> getAllSubtasks();
+    List<Subtask> getAllSubtasks();
 
     void deleteAllSubtasks();
 
@@ -45,5 +44,5 @@ public interface TaskManager {
 
     List<Subtask> getSubtasksByEpicId(int epicId);
 
-    ArrayList<Task> getHistory();
+    List<Task> getHistory();
 }
