@@ -1,7 +1,8 @@
-package tasksapp;
+package test.java.taskapp;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tasksapp.*;
 
 import java.util.List;
 
