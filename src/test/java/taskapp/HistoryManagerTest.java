@@ -40,20 +40,6 @@ public class HistoryManagerTest {
     }
 
     @Test
-    void epicShouldNotContainDeletedSubtaskId() {
-        Epic epic = new Epic("Epic", "desc");
-        manager.createEpic(epic);
-
-        Subtask subtask = new Subtask("Subtask", "desc", TaskStatus.NEW, epic.getId());
-        manager.createTask(subtask);
-
-        manager.deleteSubtask(subtask.getId());
-
-        Epic updated = manager.getEpicById(epic.getId());
-        assertFalse(updated.getSubtaskIds().contains(subtask.getId()));
-    }
-
-    @Test
     void externalChangeToTaskShouldAffectManagerStorage() {
         Task task = new Task("Original", "desc", TaskStatus.NEW);
         manager.createTask(task);

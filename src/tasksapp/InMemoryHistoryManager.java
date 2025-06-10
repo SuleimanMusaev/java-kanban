@@ -76,11 +76,11 @@ public class InMemoryHistoryManager implements HistoryManager {
         Node<T> prev;
         Node<T> next;
 
-        Node(Node<T> prev, T data, Node<T> next) {
-            this.data = data;
-            this.prev = prev;
-            this.next = next;
-        }
+//        Node(Node<T> prev, T data, Node<T> next) {
+//            this.data = data;
+//            this.prev = prev;
+//            this.next = next;
+//        } //Не используется! Раскомитить, когда будут улучшения или пригодится для другого!
 
         public Node(T data) {
             this.data = data;
