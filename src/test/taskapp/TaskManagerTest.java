@@ -1,4 +1,4 @@
-package test.java.taskapp;
+package test.taskapp;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
