@@ -4,7 +4,6 @@ public class TaskManagerApp {
 
     public static void main(String[] args) {
         TaskManager manager = Managers.getDefault();
-
         System.out.println("=== Создаем эпик 'Организовать Мероприятие' ===");
         Epic epic1 = new Epic("Мероприятие", "Организовать праздник в честь открытия.");
         Epic epic2 = new Epic("Переезд", "Спланировать переезд.");
@@ -33,7 +32,7 @@ public class TaskManagerApp {
         Task mallTask = new Task("Сходить в ТЦ", "Купить продукты", TaskStatus.NEW);
         manager.createTask(mallTask);
 
-        Task callTask = new Task("Позвонить бабушке в субботу.", "Поздравит с днем рождения.", TaskStatus.NEW);
+        Task callTask = new Task("Позвонить бабушке в субботу.", "Поздравить с днем рождения.", TaskStatus.NEW);
         manager.createTask(callTask);
 
         //просмотр задач
@@ -54,27 +53,27 @@ public class TaskManagerApp {
             System.out.println(task);
         }
 
-//        System.out.println("\n=== Меняем статусы ===");
-//        planSubtask1.setStatus(TaskStatus.IN_PROGRESS);
-//        manager.updateSubtask(planSubtask1);
-//        System.out.println("Статус эпика после изменения подзадачи: " + manager.getEpicById(epic1.getId()).getStatus());
-//
-//        mallTask.setStatus(TaskStatus.DONE);
-//        manager.updateTask(mallTask);
-//
-//        System.out.println("\n=== Завершаем подзадачи ===");
-//        planSubtask1.setStatus(TaskStatus.DONE);
-//        anchorSubtask.setStatus(TaskStatus.DONE);
-//        manager.updateSubtask(planSubtask1);
-//        manager.updateSubtask(anchorSubtask);
-//        System.out.println("Статус эпика после завершения всех подзадач: " + epic1.getStatus());
-//
-//        manager.getEpicById(epic1.getId());
-//        manager.getSubtaskById(planSubtask1.getId());
-//        manager.getTaskById(mallTask.getId());
-//
-//        System.out.println("\n=== Удаляем задачу 'Сходить в ТЦ' ===");
-//        manager.deleteTask(mallTask.getId());
-//        System.out.println("Остались задачи: " + manager.getAllTasks().size());
+        System.out.println("\n=== Меняем статусы ===");
+        planSubtask1.setStatus(TaskStatus.IN_PROGRESS);
+        manager.updateSubtask(planSubtask1);
+        System.out.println("Статус эпика после изменения подзадачи: " + manager.getEpicById(epic1.getId()).getStatus());
+
+        mallTask.setStatus(TaskStatus.DONE);
+        manager.updateTask(mallTask);
+
+        System.out.println("\n=== Завершаем подзадачи ===");
+        planSubtask1.setStatus(TaskStatus.DONE);
+        anchorSubtask.setStatus(TaskStatus.DONE);
+        manager.updateSubtask(planSubtask1);
+        manager.updateSubtask(anchorSubtask);
+        System.out.println("Статус эпика после завершения всех подзадач: " + epic1.getStatus());
+
+        manager.getEpicById(epic1.getId());
+        manager.getSubtaskById(planSubtask1.getId());
+        manager.getTaskById(mallTask.getId());
+
+        System.out.println("\n=== Удаляем задачу 'Сходить в ТЦ' ===");
+        manager.deleteTask(mallTask.getId());
+        System.out.println("Остались задачи: " + manager.getAllTasks().size());
     }
 }

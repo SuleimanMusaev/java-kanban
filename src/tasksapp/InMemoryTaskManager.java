@@ -4,11 +4,11 @@ import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
 
-    private final Map<Integer, Task> tasks = new HashMap<>();
-    private final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private final Map<Integer, Epic> epics = new HashMap<>();
-    private final HistoryManager historyManager;
-    private int nextId = 1;
+    protected final Map<Integer, Task> tasks = new HashMap<>();
+    protected final Map<Integer, Subtask> subtasks = new HashMap<>();
+    protected final Map<Integer, Epic> epics = new HashMap<>();
+    protected final HistoryManager historyManager;
+    protected int nextId = 1;
 
 
     public InMemoryTaskManager(HistoryManager historyManager) {
@@ -60,6 +60,7 @@ public class InMemoryTaskManager implements TaskManager {
         Task removed = tasks.remove(id);
         if (removed != null) {
             System.out.println("Задача ID = " + id + " удалена.");
+            historyManager.remove(id);
         } else {
             System.out.println("Ошибка: задача не найдена");
         }
@@ -110,7 +111,9 @@ public class InMemoryTaskManager implements TaskManager {
         if (epic != null) {
             for (int subtaskId : epic.getSubtaskIds()) {
                 subtasks.remove(subtaskId);
+                historyManager.remove(subtaskId);
             }
+            historyManager.remove(id);
             System.out.println("Эпик ID = " + id + " и его подзадачи удалены.");
         } else
             System.out.println("Ошибка: эпик не найден.");
@@ -174,6 +177,7 @@ public class InMemoryTaskManager implements TaskManager {
             epic.removeSubtaskId(id);
             updateEpicStatus(epic);
             System.out.println("Подзадача ID = " + id + " удалена.");
+            historyManager.remove(id);
         } else
             System.out.println("Ошибка: подзадача не найдена");
     }

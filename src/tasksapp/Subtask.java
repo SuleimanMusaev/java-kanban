@@ -10,6 +10,11 @@ public class Subtask extends Task {
         System.out.println("Создана подзадача: '" + name + "' (ID эпика: " + epicId + ")");
     }
 
+    @Override
+    public TaskType getType() {
+        return TaskType.SUBTASK;
+    }
+
     public int getEpicId() {
         return epicId;
     }
