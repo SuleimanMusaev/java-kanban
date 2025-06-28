@@ -17,13 +17,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\src\data.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\src\tasksapp\data.csv">
           <value>
             <Attribute>

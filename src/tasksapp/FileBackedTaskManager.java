@@ -15,7 +15,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         this.file = file;
     }
 
-    protected void save() {
+    private void save() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write("id,type,name,status,description,epic");
             writer.newLine();
@@ -37,6 +37,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
             writer.newLine();
             writer.write(historyToString(historyManager));
+            //String history = historyManager.toString();
+            //writer.write(history);
 
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка при сохранении в файл", e);
@@ -65,8 +67,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 i++;
             }
 
-            if (i + 1 < lines.size()) {
-                List<Integer> history = historyFromString(lines.get(i + 1));
+            if (!lines.get(lines.size() - 1).isBlank()) {
+                List<Integer> history = historyFromString(lines.get(lines.size() - 1));
                 for (int id : history) {
                     Task task = manager.tasks.get(id);
                     if (task == null) task = manager.subtasks.get(id);
@@ -218,5 +220,35 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     public void deleteSubtask(int id) {
         super.deleteSubtask(id);
         save();
+    }
+
+    @Override
+    public Task getTaskById(int id) {
+        Task task = tasks.get(id);
+        if (task != null) {
+            historyManager.add(task);
+            save();
+        }
+        return task;
+    }
+
+    @Override
+    public Epic getEpicById(int id) {
+        Epic epic = epics.get(id);
+        if (epic != null) {
+            historyManager.add(epic);
+            save();
+        }
+        return epic;
+    }
+
+    @Override
+    public Subtask getSubtaskById(int id) {
+        Subtask subtask = subtasks.get(id);
+        if (subtask != null) {
+            historyManager.add(subtask);
+            save();
+        }
+        return subtask;
     }
 }
