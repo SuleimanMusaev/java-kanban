@@ -1,4 +1,4 @@
-package tasksapp;
+package tasksapp.model;
 
 public enum TaskType {
     TASK,

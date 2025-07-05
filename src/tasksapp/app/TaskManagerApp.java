@@ -1,4 +1,11 @@
-package tasksapp;
+package tasksapp.app;
+
+import tasksapp.manager.Managers;
+import tasksapp.manager.TaskManager;
+import tasksapp.model.Epic;
+import tasksapp.model.Subtask;
+import tasksapp.model.Task;
+import tasksapp.model.TaskStatus;
 
 public class TaskManagerApp {
 

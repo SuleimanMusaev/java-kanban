@@ -1,4 +1,6 @@
-package tasksapp;
+package tasksapp.manager;
+
+import tasksapp.model.*;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package tasksapp;
+package tasksapp.model;
 
 public class Subtask extends Task {
 

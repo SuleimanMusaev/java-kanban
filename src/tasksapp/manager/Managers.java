@@ -1,4 +1,4 @@
-package tasksapp;
+package tasksapp.manager;
 
 public class Managers {
 

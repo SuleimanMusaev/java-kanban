@@ -1,7 +1,11 @@
-package taskapp;
+package taskapp.manager;
 
 import org.junit.jupiter.api.*;
-import tasksapp.*;
+import tasksapp.manager.FileBackedTaskManager;
+import tasksapp.model.Epic;
+import tasksapp.model.Subtask;
+import tasksapp.model.Task;
+import tasksapp.model.TaskStatus;
 
 import java.io.File;
 import java.io.IOException;
