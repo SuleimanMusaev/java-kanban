@@ -1,4 +1,4 @@
-package tasksapp;
+package tasksapp.model;
 
 import java.util.Objects;
 
@@ -13,6 +13,10 @@ public class Task {
         this.name = name;
         this.description = description;
         this.status = status;
+    }
+
+    public TaskType getType() {
+        return TaskType.TASK;
     }
 
     public String getName() {

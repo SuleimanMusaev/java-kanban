@@ -1,4 +1,4 @@
-package tasksapp;
+package tasksapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,11 @@ public class Epic extends Task {
     public void clearSubtaskIds() {
         subtaskIds.clear();
         System.out.println("Все подзадачи эпика ID=" + this.getId() + " удалены");
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.EPIC;
     }
 
     @Override

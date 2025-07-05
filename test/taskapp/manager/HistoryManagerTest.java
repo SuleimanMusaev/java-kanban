@@ -1,8 +1,13 @@
-package taskapp;
+package taskapp.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tasksapp.*;
+import tasksapp.manager.Managers;
+import tasksapp.manager.TaskManager;
+import tasksapp.model.Epic;
+import tasksapp.model.Subtask;
+import tasksapp.model.Task;
+import tasksapp.model.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
