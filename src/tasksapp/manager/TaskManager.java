@@ -1,4 +1,8 @@
-package tasksapp;
+package tasksapp.manager;
+
+import tasksapp.model.Epic;
+import tasksapp.model.Subtask;
+import tasksapp.model.Task;
 
 import java.util.List;
 

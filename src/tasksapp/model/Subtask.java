@@ -1,4 +1,4 @@
-package tasksapp;
+package tasksapp.model;
 
 public class Subtask extends Task {
 
@@ -8,6 +8,11 @@ public class Subtask extends Task {
         super(name, description, status);
         this.epicId = epicId;
         System.out.println("Создана подзадача: '" + name + "' (ID эпика: " + epicId + ")");
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.SUBTASK;
     }
 
     public int getEpicId() {

@@ -1,4 +1,6 @@
-package tasksapp;
+package tasksapp.manager;
+
+import tasksapp.model.Task;
 
 import java.util.List;
 

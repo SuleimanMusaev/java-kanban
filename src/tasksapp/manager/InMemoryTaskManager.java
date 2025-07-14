@@ -1,14 +1,19 @@
-package tasksapp;
+package tasksapp.manager;
+
+import tasksapp.model.Epic;
+import tasksapp.model.Subtask;
+import tasksapp.model.Task;
+import tasksapp.model.TaskStatus;
 
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
 
-    private final Map<Integer, Task> tasks = new HashMap<>();
-    private final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private final Map<Integer, Epic> epics = new HashMap<>();
-    private final HistoryManager historyManager;
-    private int nextId = 1;
+    protected final Map<Integer, Task> tasks = new HashMap<>();
+    protected final Map<Integer, Subtask> subtasks = new HashMap<>();
+    protected final Map<Integer, Epic> epics = new HashMap<>();
+    protected final HistoryManager historyManager;
+    protected int nextId = 1;
 
 
     public InMemoryTaskManager(HistoryManager historyManager) {
@@ -34,7 +39,9 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task getTaskById(int id) {
         Task task = tasks.get(id);
-        historyManager.add(task);
+        if (task != null) {
+            historyManager.add(task);
+        }
         return task;
     }
 
