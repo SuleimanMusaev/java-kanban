@@ -41,6 +41,7 @@ public class Task {
     public LocalDateTime getEndTime() {
         return (startTime != null && duration != null) ? startTime.plus(duration) : null;
     }
+
     public TaskType getType() {
         return TaskType.TASK;
     }
@@ -79,15 +80,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", startTime=" + startTime.format(formatter) +
-                ", duration=" +
-                (duration != null ? duration.toMinutes() + " мин" : "null") +
-                '}';
+        return "Task{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", status=" + status + ", startTime=" + startTime.format(formatter) + ", duration=" + (duration != null ? duration.toMinutes() + " мин" : "null") + '}';
     }
 
     @Override
