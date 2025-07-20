@@ -10,6 +10,8 @@ import tasksapp.model.TaskStatus;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,8 +49,13 @@ public class FileBackedTaskManagerTest {
         FileBackedTaskManager manager = new FileBackedTaskManager(tempFile);
 
         Task task1 = new Task("Task1", "Description1", TaskStatus.NEW);
-        Task task2 = new Task("Task2", "Description2", TaskStatus.IN_PROGRESS);
+        task1.setStartTime(LocalDateTime.now());
+        task1.setDuration(Duration.ofMinutes(30));
         manager.createTask(task1);
+
+        Task task2 = new Task("Task2", "Description2", TaskStatus.IN_PROGRESS);
+        task2.setStartTime(LocalDateTime.now().plusDays(1));
+        task2.setDuration(Duration.ofMinutes(30));
         manager.createTask(task2);
 
         Epic epic = new Epic("Epic", "Description");
@@ -56,6 +63,8 @@ public class FileBackedTaskManagerTest {
 
         Subtask subtask = new Subtask("Subtask", "Description",
                 TaskStatus.DONE, epic.getId());
+        subtask.setStartTime(LocalDateTime.now().plusDays(5));
+        subtask.setDuration(Duration.ofMinutes(30));
         manager.createSubtask(subtask);
 
         manager.getTaskById(task1.getId());
@@ -77,6 +86,8 @@ public class FileBackedTaskManagerTest {
     void shouldPreserveTaskDataAfterReload() {
         FileBackedTaskManager manager = new FileBackedTaskManager(tempFile);
         Task original = new Task("Original", "Test", TaskStatus.IN_PROGRESS);
+        original.setStartTime(LocalDateTime.now());
+        original.setDuration(Duration.ofMinutes(30));
         manager.createTask(original);
 
         FileBackedTaskManager reloaded = FileBackedTaskManager.loadFromFile(tempFile);

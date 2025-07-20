@@ -8,6 +8,8 @@ import tasksapp.model.TaskStatus;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class FileReadApp {
 
@@ -26,12 +28,19 @@ public class FileReadApp {
         FileBackedTaskManager manager = new FileBackedTaskManager(file);
 
         Task task1 = new Task("Task1", "Description", TaskStatus.NEW);
+        task1.setStartTime(LocalDateTime.of(2025, 7, 20, 20, 30));
+        task1.setDuration(Duration.ofMinutes(30));
         manager.createTask(task1);
 
         Epic epic1 = new Epic("Epic1", "Epic description");
+        epic1.setStartTime(LocalDateTime.of(2025, 7, 20, 20, 0));
+        epic1.setDuration(Duration.ofMinutes(60));
+        epic1.setEndTime(LocalDateTime.of(2025, 7, 20, 21, 0));
         manager.createEpic(epic1);
 
         Subtask subtask1 = new Subtask("Subtask1", "Subtask Description", TaskStatus.NEW, epic1.getId());
+        subtask1.setStartTime(LocalDateTime.of(2025, 7, 22, 20,0));
+        subtask1.setDuration(Duration.ofMinutes(90));
         manager.createSubtask(subtask1);
 
         // Используем задачи, чтобы они попали в историю

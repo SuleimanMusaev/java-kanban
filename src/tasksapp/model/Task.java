@@ -1,5 +1,8 @@
 package tasksapp.model;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Task {
@@ -9,12 +12,35 @@ public class Task {
     private int id;
     private TaskStatus status;
 
+    protected LocalDateTime startTime;
+    protected Duration duration;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MM, yyyy. HH:mm");
+
     public Task(String name, String description, TaskStatus status) {
         this.name = name;
         this.description = description;
         this.status = status;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getEndTime() {
+        return (startTime != null && duration != null) ? startTime.plus(duration) : null;
+    }
     public TaskType getType() {
         return TaskType.TASK;
     }
@@ -58,6 +84,9 @@ public class Task {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
+                ", startTime=" + startTime.format(formatter) +
+                ", duration=" +
+                (duration != null ? duration.toMinutes() + " мин" : "null") +
                 '}';
     }
 
