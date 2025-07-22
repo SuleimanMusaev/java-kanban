@@ -53,12 +53,12 @@ public class TaskManagerApp {
 
         System.out.println("\n=== Создаем обычную задачу ===");
         Task mallTask = new Task("Сходить в ТЦ", "Купить продукты", TaskStatus.NEW);
-        mallTask.setStartTime(LocalDateTime.of(2025, 7, 19, 17, 0));
+        mallTask.setStartTime(LocalDateTime.now().plusDays(1));
         mallTask.setDuration(Duration.ofMinutes(60));
         manager.createTask(mallTask);
 
         Task callTask = new Task("Позвонить бабушке в субботу.", "Поздравить с днем рождения.", TaskStatus.NEW);
-        callTask.setStartTime(LocalDateTime.of(2025, 7, 18, 20, 0));
+        callTask.setStartTime(LocalDateTime.now().plusDays(2));
         callTask.setDuration(Duration.ofMinutes(30));
         manager.createTask(callTask);
 

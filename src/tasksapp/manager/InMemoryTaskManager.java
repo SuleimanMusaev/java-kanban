@@ -40,10 +40,6 @@ public class InMemoryTaskManager implements TaskManager {
         if (newTask.getStartTime() == null || newTask.getEndTime() == null) return;
 
         for (Task task : prioritizedTasks) {
-            if (task.getId() == newTask.getId()) continue;
-
-            if (task.getStartTime() == null || task.getEndTime() == null) continue;
-
             boolean intersects = newTask.getStartTime().isBefore(task.getEndTime()) &&
                     newTask.getEndTime().isAfter(task.getStartTime());
 
@@ -295,16 +291,14 @@ public class InMemoryTaskManager implements TaskManager {
             return;
         }
 
-        List<Subtask> withStart = epicSubtasks.stream()
+        LocalDateTime start = epicSubtasks.stream()
                 .filter(s -> s.getStartTime() != null)
-                .collect(Collectors.toList());
-
-        LocalDateTime start = withStart.stream()
                 .map(Subtask::getStartTime)
                 .min(LocalDateTime::compareTo)
                 .orElse(null);
 
-        LocalDateTime end = withStart.stream()
+        LocalDateTime end = epicSubtasks.stream()
+                .filter(s -> s.getStartTime() != null)
                 .map(Subtask::getEndTime)
                 .filter(Objects::nonNull)
                 .max(LocalDateTime::compareTo)

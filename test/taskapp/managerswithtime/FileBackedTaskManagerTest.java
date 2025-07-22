@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasksapp.manager.FileBackedTaskManager;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,9 +16,9 @@ public class FileBackedTaskManagerTest extends TaskManagerTestWithTime<FileBacke
     @BeforeEach
     void init() throws IOException {
         tempFile = File.createTempFile("tasks", ".csv");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
-            writer.write("id,type,name,status,description,epic,start,duration\n");
-        }
+        manager = new FileBackedTaskManager(tempFile);
+        // Чтобы был доступ к методу save(), сделал его публичным, чтобы записать файл
+        manager.save();
     }
 
     @Test

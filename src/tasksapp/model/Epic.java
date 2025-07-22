@@ -1,6 +1,5 @@
 package tasksapp.model;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,19 +10,8 @@ public class Epic extends Task {
 
     private LocalDateTime endTime;
 
-
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-    }
-
-    @Override
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    @Override
-    public Duration getDuration() {
-        return duration;
     }
 
     @Override
@@ -34,31 +22,6 @@ public class Epic extends Task {
     public Epic(String name, String description) {
         super(name, description, TaskStatus.NEW);
         System.out.println("Создан эпик: '" + name + "'");
-    }
-
-    public void updateTimeFields(List<Subtask> subtasks) {
-        Duration totalDuration = Duration.ZERO;
-        LocalDateTime earliestStart = null;
-        LocalDateTime latestEnd = null;
-
-        for (Subtask subtask : subtasks) {
-            if (subtask.getStartTime() != null && subtask.getDuration() != null) {
-                totalDuration = totalDuration.plus(subtask.getDuration());
-
-                if (earliestStart == null || subtask.getStartTime().isBefore(earliestStart)) {
-                    earliestStart = subtask.getStartTime();
-                }
-
-                LocalDateTime subEnd = subtask.getEndTime();
-                if (latestEnd == null || (subEnd != null && subEnd.isAfter(latestEnd))) {
-                    latestEnd = subEnd;
-                }
-            }
-        }
-
-        this.duration = totalDuration;
-        this.startTime = earliestStart;
-        this.endTime = latestEnd;
     }
 
     public List<Integer> getSubtaskIds() {
