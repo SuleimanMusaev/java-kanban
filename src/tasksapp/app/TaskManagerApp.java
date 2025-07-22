@@ -7,29 +7,45 @@ import tasksapp.model.Subtask;
 import tasksapp.model.Task;
 import tasksapp.model.TaskStatus;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class TaskManagerApp {
 
     public static void main(String[] args) {
         TaskManager manager = Managers.getDefault();
+
         System.out.println("=== Создаем эпик 'Организовать Мероприятие' ===");
         Epic epic1 = new Epic("Мероприятие", "Организовать праздник в честь открытия.");
-        Epic epic2 = new Epic("Переезд", "Спланировать переезд.");
         manager.createEpic(epic1);
+
+        System.out.println("=== Создаем эпик 'Переезд' ===");
+        Epic epic2 = new Epic("Переезд", "Спланировать переезд.");
         manager.createEpic(epic2);
 
         System.out.println("\n=== Добавляем подзадачи ===");
         Subtask planSubtask1 = new Subtask("Написать сценарий.", "Начало, речь, конец.",
                 TaskStatus.NEW, epic1.getId());
+        planSubtask1.setStartTime(LocalDateTime.of(2025, 7, 20, 10, 0));
+        planSubtask1.setDuration(Duration.ofMinutes(90));
+        manager.createSubtask(planSubtask1);
+
         Subtask anchorSubtask = new Subtask("Найти ведущего.", "Обговорить мероприятие.",
                 TaskStatus.NEW, epic1.getId());
-        manager.createSubtask(planSubtask1);
+        anchorSubtask.setStartTime(LocalDateTime.of(2025, 7, 20, 12, 0));
+        anchorSubtask.setDuration(Duration.ofMinutes(60));
         manager.createSubtask(anchorSubtask);
 
         Subtask planSubtask2 = new Subtask("Найти время для переезда.", "Сложить вещи.",
-                TaskStatus.NEW, epic1.getId());
-        Subtask trucker = new Subtask("Позвонить грузчику.", "Договорить по цене.",
-                TaskStatus.NEW, epic1.getId());
+                TaskStatus.NEW, epic2.getId());
+        planSubtask2.setStartTime(LocalDateTime.of(2025, 7, 21, 9, 0));
+        planSubtask2.setDuration(Duration.ofMinutes(120));
         manager.createSubtask(planSubtask2);
+
+        Subtask trucker = new Subtask("Позвонить грузчику.", "Договорить по цене.",
+                TaskStatus.NEW, epic2.getId());
+        trucker.setStartTime(LocalDateTime.of(2025, 7, 21, 12, 0));
+        trucker.setDuration(Duration.ofMinutes(45));
         manager.createSubtask(trucker);
 
         System.out.println("\nСтатус эпика после создания: " + epic1.getStatus());
@@ -37,9 +53,13 @@ public class TaskManagerApp {
 
         System.out.println("\n=== Создаем обычную задачу ===");
         Task mallTask = new Task("Сходить в ТЦ", "Купить продукты", TaskStatus.NEW);
+        mallTask.setStartTime(LocalDateTime.now().plusDays(1));
+        mallTask.setDuration(Duration.ofMinutes(60));
         manager.createTask(mallTask);
 
         Task callTask = new Task("Позвонить бабушке в субботу.", "Поздравить с днем рождения.", TaskStatus.NEW);
+        callTask.setStartTime(LocalDateTime.now().plusDays(2));
+        callTask.setDuration(Duration.ofMinutes(30));
         manager.createTask(callTask);
 
         //просмотр задач

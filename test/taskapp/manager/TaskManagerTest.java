@@ -8,6 +8,8 @@ import tasksapp.model.Subtask;
 import tasksapp.model.Task;
 import tasksapp.model.TaskStatus;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +40,8 @@ public class TaskManagerTest {
     @Test
     void inMemoryTaskManagerCanAddAndFindTasksById() {
         Task task = new Task("Task", "desc", TaskStatus.NEW);
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(30));
         manager.createTask(task);
         Task fetched = manager.getTaskById(task.getId());
 
@@ -47,10 +51,14 @@ public class TaskManagerTest {
     @Test
     void manuallyAssignedIdDoesNotConflictWithGeneratedId() {
         Task manualTask = new Task("Manual", "desc", TaskStatus.NEW);
+        manualTask.setStartTime(LocalDateTime.now());
+        manualTask.setDuration(Duration.ofMinutes(30));
         manualTask.setId(100);
         manager.createTask(manualTask);
 
         Task autoTask = new Task("Auto", "desc", TaskStatus.NEW);
+        autoTask.setStartTime(LocalDateTime.now().plusMinutes(30));
+        autoTask.setDuration(Duration.ofMinutes(60));
         manager.createTask(autoTask);
 
         assertNotEquals(manualTask.getId(), autoTask.getId());
@@ -59,6 +67,8 @@ public class TaskManagerTest {
     @Test
     void taskIsUnchangedAfterBeingAddedToManager() {
         Task task = new Task("Task", "desc", TaskStatus.NEW);
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(30));
         manager.createTask(task);
         Task retrieved = manager.getTaskById(task.getId());
 
@@ -71,6 +81,8 @@ public class TaskManagerTest {
     @Test
     void historyManagerPreservesPreviousVersionsOfTask() {
         Task task = new Task("History Task", "desc", TaskStatus.NEW);
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(30));
         manager.createTask(task);
         manager.getTaskById(task.getId());
 

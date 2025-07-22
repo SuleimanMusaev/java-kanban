@@ -11,6 +11,8 @@ import tasksapp.model.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class HistoryManagerTest {
@@ -25,6 +27,8 @@ public class HistoryManagerTest {
     @Test
     void duplicateTasksNotStoredInHistory() {
         Task task = new Task("Task", "desc", TaskStatus.NEW);
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(30));
         manager.createTask(task);
         manager.getTaskById(task.getId());
         manager.getTaskById(task.getId()); //повторный просмотр
@@ -36,6 +40,8 @@ public class HistoryManagerTest {
     @Test
     void deletedTaskShouldBeRemovedFromHistory() {
         Task task = new Task("To delete", "desc", TaskStatus.NEW);
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(30));
         manager.createTask(task);
         manager.getTaskById(task.getId());
         manager.deleteTask(task.getId());
@@ -47,6 +53,8 @@ public class HistoryManagerTest {
     @Test
     void externalChangeToTaskShouldAffectManagerStorage() {
         Task task = new Task("Original", "desc", TaskStatus.NEW);
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(30));
         manager.createTask(task);
         Task retrieved = manager.getTaskById(task.getId());
 
@@ -61,8 +69,13 @@ public class HistoryManagerTest {
         manager.createEpic(epic);
 
         Subtask subtask1 = new Subtask("Subtask1", "desc", TaskStatus.NEW, epic.getId());
-        Subtask subtask2 = new Subtask("Subtask2", "desc", TaskStatus.NEW, epic.getId());
+        subtask1.setStartTime(LocalDateTime.now());
+        subtask1.setDuration(Duration.ofMinutes(30));
         manager.createSubtask(subtask1);
+
+        Subtask subtask2 = new Subtask("Subtask2", "desc", TaskStatus.NEW, epic.getId());
+        subtask2.setStartTime(LocalDateTime.now().plusHours(10));
+        subtask2.setDuration(Duration.ofMinutes(30));
         manager.createSubtask(subtask2);
 
         manager.deleteEpic(epic.getId());

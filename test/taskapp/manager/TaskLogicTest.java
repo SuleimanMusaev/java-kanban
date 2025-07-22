@@ -9,6 +9,9 @@ import tasksapp.model.Subtask;
 import tasksapp.model.Task;
 import tasksapp.model.TaskStatus;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskLogicTest {
@@ -26,6 +29,8 @@ public class TaskLogicTest {
         manager.createEpic(epic);
 
         Subtask subtask = new Subtask("Subtask", "desc", TaskStatus.NEW, epic.getId());
+        subtask.setStartTime(LocalDateTime.now());
+        subtask.setDuration(Duration.ofMinutes(30));
         manager.createTask(subtask);
 
         manager.deleteSubtask(subtask.getId());
