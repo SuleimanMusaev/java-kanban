@@ -1,11 +1,23 @@
 package tasksapp.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Epic extends Task {
 
     private final List<Integer> subtaskIds = new ArrayList<>();
+
+    private LocalDateTime endTime;
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
 
     public Epic(String name, String description) {
         super(name, description, TaskStatus.NEW);
@@ -45,7 +57,9 @@ public class Epic extends Task {
                 ", name='" + getName() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", status=" + getStatus() +
-                ", subtaskIds=" + subtaskIds +
+                ", startTime=" + startTime +
+                ", duration=" + (duration != null ? duration.toMinutes() + " мин" : "null") +
+                ", endTime=" + endTime +
                 '}';
     }
 }

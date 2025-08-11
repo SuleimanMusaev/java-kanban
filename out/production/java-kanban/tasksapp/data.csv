@@ -1,6 +1,7 @@
-id,type,name,status,description,epic
-1,TASK,Task1,NEW,Description,
-2,EPIC,Epic1,NEW,Epic description,
-3,SUBTASK,Subtask1,NEW,Subtask Description,2
+id,type,name,status,description,startTime,duration,epicId
+
+1,TASK,Task1,NEW,Description,2025-07-20T20:30,30,
+2,EPIC,Epic1,NEW,Epic description,2025-07-22T20:00,90,
+3,SUBTASK,Subtask1,NEW,Subtask Description,2025-07-22T20:00,90,2
 
 1,2,3
