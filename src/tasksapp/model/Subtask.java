@@ -1,5 +1,7 @@
 package tasksapp.model;
 
+import java.time.format.DateTimeFormatter;
+
 public class Subtask extends Task {
 
     private int epicId;
@@ -31,7 +33,7 @@ public class Subtask extends Task {
                 ", description='" + getDescription() + '\'' +
                 ", status=" + getStatus() +
                 ", epicId=" + epicId +
-                ", startTime=" + startTime.format(formatter) +
+                ", startTime=" + startTime.format(DateTimeFormatter.ofPattern("dd, MM, yyyy. HH:mm")) +
                 ", duration=" + (duration != null ? duration.toMinutes() + " мин" : "null") +
                 '}';
     }
