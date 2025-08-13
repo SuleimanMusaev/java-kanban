@@ -14,7 +14,7 @@ public class Task {
 
     protected LocalDateTime startTime;
     protected Duration duration;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MM, yyyy. HH:mm");
+    //protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MM, yyyy. HH:mm");
 
     public Task(String name, String description, TaskStatus status) {
         this.name = name;
@@ -80,7 +80,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", status=" + status + ", startTime=" + startTime.format(formatter) + ", duration=" + (duration != null ? duration.toMinutes() + " мин" : "null") + '}';
+        return "Task{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' +
+                ", status=" + status + ", startTime=" +
+                startTime.format(DateTimeFormatter.ofPattern("dd, MM, yyyy. HH:mm")) + ", duration=" +
+                (duration != null ? duration.toMinutes() + " мин" : "null") + '}';
     }
 
     @Override
